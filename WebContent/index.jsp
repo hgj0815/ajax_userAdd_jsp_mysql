@@ -87,7 +87,7 @@
 	   if(session.getAttribute("messageType") != null){
 		   messageType = (String) session.getAttribute("messageType");
 	   }
-		if(messageContent  != null	){
+		if(messageContent  != null){
 		%>
 
 	<div class="modal fade" id="messageMedal" tabindex="-1" role="dialog"	aria-hidden="true">
