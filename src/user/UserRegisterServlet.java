@@ -15,12 +15,12 @@ import org.apache.log4j.Logger;
 public class UserRegisterServlet  extends HttpServlet {
 	private static final  long  serialVersionUID =1L;
 	
-	private final Logger logger = Logger.getLogger(UserDAO .class);
+	private final Logger logger = Logger.getLogger(UserRegisterServlet .class);
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException{
 		
-		logger.info ("[INFO]  Hello doPost.");
+		logger.info ("[INFO]  Insert_UserRegisterServlet");
 		//response.setContentType("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		String userID= request.getParameter("userID");

@@ -28,7 +28,7 @@ public class UserDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception 
-			logger.info("-1");
+			logger.info("-1_com.mysql.jdbc.Driver");
 		}
 	}
 
@@ -43,10 +43,13 @@ public class UserDAO {
 //				if(rs.next()) {
 //			공백체크로 오류메세지 띄우기 위해서추가
              if(rs.next() || userID.equals("")) {
+            	 logger.info("0");
 					return 0; //이미 존재하는 회원
 				}else {
+					logger.info("1");
 					return 1;// 가입가능한 회원 아이디
 				}
+             
 
 			} catch (Exception e) {
 				// TODO: handle exception

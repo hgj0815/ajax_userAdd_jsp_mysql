@@ -12,20 +12,24 @@
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript">
 	function registerCheckFunction(){
+		    console.log("registerCheckFunction_testOK===============");
 			var userID = $('#userID').val();
 			$.ajax({
 					type: 'POST',
-					url: './userRegisterCheckServlet',
-					success: function(result){
+					url: './UserRegisterCheckServlet',
+					data:{userID : userID},
+					success:  function(result){
 						if(result ==1){
+							console.log('testOK');
 							$('#checkMessage').html('사용할 수 있는 아이디입니다.');
 							$('#checkType').attr('class','modal-content panel-success');
 						}else{
+							console.log('testNG');
 							$('#checkMessage').html('사용할 수 없는 아이디입니다.');
 							$('#checkType').attr('class','modal-content panel-warning');
-							
+						
 						}
-						$('#checkModal').modal('show'	);
+						$('#checkModal').modal('show');
 					}
 		})
 	}
@@ -47,8 +51,7 @@
 <body>
 	<div class="container">
 		<form method="post" action="./userRegister">
-			<table class="table talbe-bordered table-hover"
-				style="text-align: center; border: 1px solid #ddddd">
+			<table class="table talbe-bordered table-hover" style="text-align: center; border: 1px solid #ddddd">
 				<thead>
 					<tr>
 						<th colspan="3"><h4>회원 등록 양식</h4></th>
@@ -58,7 +61,7 @@
 					<tr>
 						<td style="width: 110px;"><h5>아이디</h5></td>
 						<td><input class="form-control" type="text" id="userID"	name="userID" maxlength="20"  placeholder="아이디를 입력해주세요"></td>
-						<td style="width: 110px;"><button class="btn btn-primary" 	onclick="registerCheckFuntion()">중복체크</button></td>
+						<td style="width: 110px;"><button class="btn btn-primary" type="button"	onclick="registerCheckFunction();">중복체크</button></td>
 					</tr>
 					<tr>
 						<td style="width: 110px;"><h5>비밀번호</h5></td>
@@ -109,40 +112,39 @@
 	   }
 		if(messageContent  != null){
 		%>
-
-	<div class="modal fade" id="messageMedal" tabindex="-1" role="dialog"	aria-hidden="true">
-		<div class="vertical-alignment-helper">
-		<div class="  vertical-align-center">
-			<div class="modal-content"
-				<%if(messageType.equals("오류메세지")) out.println("panel-warning"); else out.println("panel-success");%>>
-				<div class="modal-header">
-					 <button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">
-						<%=messageType %>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<%=messageContent %>
-				</div>
-				<div class="modal-footer">
-					 <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+		<div class="modal fade" id="messageMedal" tabindex="-1" role="dialog"	aria-hidden="true">
+			<div class="vertical-alignment-helper">
+			<div class="  vertical-align-center">
+				<div class="modal-content"
+					<%if(messageType.equals("오류메세지")) out.println("panel-warning"); else out.println("panel-success");%>>
+					<div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">
+							<%=messageType %>
+						</h4>
+					</div>
+					<div class="modal-body">
+						<%=messageContent %>
+					</div>
+					<div class="modal-footer">
+						 <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+					</div>
 				</div>
 			</div>
+			</div>
 		</div>
-		</div>
-	</div>
-   <script>
-   		$('#messageMedal').modal('show');
-   </script>
-	<%
-	   session.removeAttribute("messageContent");
-	   session.removeAttribute("messageType");
-		}
+	   <script>
+	   		$('#messageMedal').modal('show');
+	   </script>
+		<%
+		   session.removeAttribute("messageContent");
+		   session.removeAttribute("messageType");
+			}
 		%>
-<div class="modal fade" id="checkMedal" tabindex="-1" role="dialog"	aria-hidden="true">
+<div class="modal fade" id="checkModal" tabindex="-1" role="dialog"	aria-hidden="true">
 		<div class="vertical-alignment-helper">
-		<div class="  vertical-align-center">
-			<div id='checkType' class="modal-content  panel-info">
+		<div class="modal-dialog vertical-align-center">
+			<div id="checkType" class="modal-content  panel-info">
 				<div class="modal-header">
 					 <button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">
@@ -158,7 +160,7 @@
 			</div>
 		</div>
 		</div>
-	</div>
+</div>
 
 </body>
 </html>
